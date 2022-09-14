@@ -15,7 +15,7 @@ const signup = async (req, res) => {
 
         const userId = crypto.randomBytes(16).toString('hex');
 
-        const serverClient = connect(api_key, api_secret, app_id);
+        const serverClient = await connect(api_key, api_secret, app_id);
 
         const hashedPassword = await bcrypt.hash(password, 10);
 

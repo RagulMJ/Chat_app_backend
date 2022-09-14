@@ -35,7 +35,9 @@ const login = async (req, res) => {
         
         const serverClient = connect(api_key, api_secret, app_id);
         const client = StreamChat.getInstance(api_key, api_secret);
-
+        if(!client.secret){
+            client.secret=process.env.STREAM_API_SECRET
+        }
         const { users } = await client.queryUsers({ name: username });
 
         if(!users.length) return res.status(400).json({ message: 'User not found' });
